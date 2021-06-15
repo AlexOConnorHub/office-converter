@@ -1,6 +1,6 @@
 <?php
 
-namespace AlexOConnorHub\OfficeConverter;
+namespace alexoconnorhub\OfficeConverter;
 
 class OfficeConverter
 {
