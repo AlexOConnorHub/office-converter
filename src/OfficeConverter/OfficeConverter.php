@@ -140,7 +140,7 @@ class OfficeConverter
     protected function prepOutput($outdir, $filename, $outputExtension)
     {
         $DS = DIRECTORY_SEPARATOR;
-        $tmpName = ($this->extension ? str_replace($this->extension, '', $this->basename) : $this->basename . '.').$outputExtension;
+        $tmpName = ($this->extension ? basename($this->basename, $this->extension) : $this->basename . '.').$outputExtension;
         if (rename($outdir.$DS.$tmpName, $outdir.$DS.$filename)) {
             return $outdir.$DS.$filename;
         } elseif (is_file($outdir.$DS.$tmpName)) {
@@ -157,61 +157,27 @@ class OfficeConverter
      */
     private function getAllowedConverter($extension = null)
     {
+        $extension = strtolower($extension);
+        
         $allowedConverter = [
             '' => ['pdf'],
             'pptx' => ['pdf'],
-            'ppt' => ['pdf'],
+            'ppt' => ['pdf', 'pptx'],
             'pdf' => ['pdf'],
             'docx' => ['pdf', 'odt', 'html'],
-            'doc' => ['pdf', 'odt', 'html'],
+            'doc' => ['pdf', 'docx', 'odt', 'html'],
             'wps' => ['pdf', 'odt', 'html'],
             'dotx' => ['pdf', 'odt', 'html'],
             'docm' => ['pdf', 'odt', 'html'],
             'dotm' => ['pdf', 'odt', 'html'],
             'dot' => ['pdf', 'odt', 'html'],
-            'odt' => ['pdf', 'html'],
+            'odt' => ['pdf', 'html', 'docx'],
             'xlsx' => ['pdf'],
-            'xls' => ['pdf'],
+            'xls' => ['pdf', 'xlsx'],
             'png' => ['pdf'],
             'jpg' => ['pdf'],
             'jpeg' => ['pdf'],
             'jfif' => ['pdf'],
-            'PPTX' => ['pdf'],
-            'PPT' => ['pdf'],
-            'PDF' => ['pdf'],
-            'DOCX' => ['pdf', 'odt', 'html'],
-            'DOC' => ['pdf', 'odt', 'html'],
-            'WPS' => ['pdf', 'odt', 'html'],
-            'DOTX' => ['pdf', 'odt', 'html'],
-            'DOCM' => ['pdf', 'odt', 'html'],
-            'DOTM' => ['pdf', 'odt', 'html'],
-            'DOT' => ['pdf', 'odt', 'html'],
-            'ODT' => ['pdf', 'html'],
-            'XLSX' => ['pdf'],
-            'XLS' => ['pdf'],
-            'PNG' => ['pdf'],
-            'JPG' => ['pdf'],
-            'JPEG' => ['pdf'],
-            'JFIF' => ['pdf'],
-            'Pptx' => ['pdf'],
-            'Ppt' => ['pdf'],
-            'Pdf' => ['pdf'],
-            'Docx' => ['pdf', 'odt', 'html'],
-            'Doc' => ['pdf', 'odt', 'html'],
-            'Wps' => ['pdf', 'odt', 'html'],
-            'Dotx' => ['pdf', 'odt', 'html'],
-            'Docm' => ['pdf', 'odt', 'html'],
-            'Dotm' => ['pdf', 'odt', 'html'],
-            'Dot' => ['pdf', 'odt', 'html'],
-            'Ddt' => ['pdf', 'html'],
-            'Xlsx' => ['pdf'],
-            'Xls' => ['pdf'],
-            'Png' => ['pdf'],
-            'Jpg' => ['pdf'],
-            'Jpeg' => ['pdf'],
-            'Jfif' => ['pdf'],
-            'rtf'  => ['docx', 'txt', 'pdf'],
-            'txt'  => ['pdf', 'odt', 'doc', 'docx', 'html'],
         ];
 
         if (null !== $extension) {
