@@ -157,7 +157,6 @@ class OfficeConverter
      */
     private function getAllowedConverter($extension = null)
     {
-        $extension = strtolower($extension);
         
         $allowedConverter = [
             '' => ['pdf'],
@@ -181,6 +180,7 @@ class OfficeConverter
         ];
 
         if (null !== $extension) {
+            $extension = strtolower($extension);
             if (isset($allowedConverter[$extension])) {
                 return $allowedConverter[$extension];
             }
