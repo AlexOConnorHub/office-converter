@@ -163,6 +163,7 @@ class OfficeConverter
             '' => ['pdf'],
             'pptx' => ['pdf'],
             'ppt' => ['pdf', 'pptx'],
+            'odp' => ['pdf', 'pptx'],
             'pdf' => ['pdf'],
             'docx' => ['pdf', 'odt', 'html'],
             'doc' => ['pdf', 'docx', 'odt', 'html'],
@@ -178,6 +179,7 @@ class OfficeConverter
             'jpg' => ['pdf'],
             'jpeg' => ['pdf'],
             'jfif' => ['pdf'],
+            'txt' => ['pdf', 'docx'],
         ];
 
         if (null !== $extension) {
